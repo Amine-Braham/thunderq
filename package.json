@@ -1,0 +1,28 @@
+{
+  "name": "myjobq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "demo": "ts-node main_func/demo.ts",
+    "producer": "ts-node main_func/producer.ts",
+    "consumer": "ts-node main_func/consumer.ts",
+    "scheduler": "ts-node main_func/scheduler.ts",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.9"
+  },
+  "dependencies": {
+    "eventemitter3": "^5.0.1",
+    "ioredis": "^5.6.0",
+    "ioredis-mock": "^8.9.0",
+    "nanoid": "^5.1.5"
+  }
+}
