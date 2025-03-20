@@ -13,7 +13,7 @@ export class Queue {
     const job = new Job(payload, quotaKey);
 
     // Ensure job data is correctly stored
-    await this.redis.hset(`job:${job.id}`, {
+    await this.redis.hset(`jobs:${job.id}`, {
       status: job.status,
       payload: JSON.stringify(job.payload), // Ensure payload is serialized
       quotaKey: job.quotaKey || "",
@@ -65,7 +65,7 @@ export class Queue {
 
   // Method to get job by id
   async getJob(jobId: string): Promise<Job | null> {
-    const jobData = await this.redis.hgetall(`job:${jobId}`);
+    const jobData = await this.redis.hgetall(`jobs:${jobId}`);
     if (!jobData || Object.keys(jobData).length === 0) {
       return null;
     }

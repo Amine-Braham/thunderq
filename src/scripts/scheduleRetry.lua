@@ -1,5 +1,5 @@
 -- Schedule a job for retry
--- KEYS[1]: jobKey (job:jobId)
+-- KEYS[1]: jobKey (jobs:jobId)
 -- KEYS[2]: delayedKey (delayed:queueName)
 -- KEYS[3]: processingKey (processing:queueName)
 -- ARGV[1]: jobId

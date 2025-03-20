@@ -171,7 +171,7 @@ export class Worker extends EventEmitter {
 
       // Update job in database with new attempt count
       await this.redis.hset(
-        `job:${job.id}`,
+        `jobs:${job.id}`,
         "attempts",
         job.attempts.toString()
       );
@@ -204,7 +204,7 @@ export class Worker extends EventEmitter {
           );
 
           // Use atomic Lua script to schedule the retry
-          const jobKey = `job:${job.id}`;
+          const jobKey = `jobs:${job.id}`;
           const delayedKey = `delayed:${this.queueName}`;
           const processingKey = `processing:${this.queueName}`;
 
@@ -277,7 +277,7 @@ export class Worker extends EventEmitter {
   }
 
   private async getJob(jobId: string): Promise<Job | null> {
-    const jobData = await this.redis.hgetall(`job:${jobId}`);
+    const jobData = await this.redis.hgetall(`jobs:${jobId}`);
     if (!jobData || Object.keys(jobData).length === 0) {
       return null;
     }
@@ -306,7 +306,7 @@ export class Worker extends EventEmitter {
   ): Promise<void> {
     try {
       // Set job status to active
-      await this.redis.hset(`job:${job.id}`, "status", "active");
+      await this.redis.hset(`jobs:${job.id}`, "status", "active");
 
       // Check quota limit if job has a quota key
       let quotaApplied = false;
@@ -351,7 +351,7 @@ export class Worker extends EventEmitter {
   }
 
   private async markJobCompleted(jobId: string): Promise<void> {
-    const jobKey = `job:${jobId}`;
+    const jobKey = `jobs:${jobId}`;
     const processingKey = `processing:${this.queueName}`;
 
     await this.redis.markJobCompleted(jobKey, processingKey, jobId);
@@ -362,7 +362,7 @@ export class Worker extends EventEmitter {
     error: Error,
     stackTrace: string
   ): Promise<void> {
-    const jobKey = `job:${jobId}`;
+    const jobKey = `jobs:${jobId}`;
     const processingKey = `processing:${this.queueName}`;
     const errorMessage = `${error.name}: ${error.message}`;
 

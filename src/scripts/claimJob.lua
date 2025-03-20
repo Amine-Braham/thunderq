@@ -17,7 +17,7 @@ if redis.call("HEXISTS", KEYS[2], jobId) == 1 then
 end
 
 -- Check if job is scheduled for retry
-local jobKey = "job:" .. jobId
+local jobKey = "jobs:" .. jobId
 local retryAt = redis.call("HGET", jobKey, "retryAt")
 local now = redis.call("TIME")[1] * 1000 -- Current time in milliseconds
 

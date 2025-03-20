@@ -12,7 +12,7 @@ async function run() {
   //   subject: "Welcome to our service!",
   //   template: "welcome",
   // });
-  // console.log(`Added regular job: ${job1Id}`);
+  // console.log(`Added regular jobs: ${job1Id}`);
 
   // // Add job with quota key (to limit concurrent jobs for the same user)
   // const job2Id = await emailQueue.addJob(
@@ -35,7 +35,7 @@ async function run() {
   //   undefined,
   //   10000
   // ); // 10 second delay
-  // console.log(`Added delayed job: ${job3Id}`);
+  // console.log(`Added delayed jobs: ${job3Id}`);
 
   // Add multiple jobs with the same quota key
   // Only 2 will process concurrently if using maxQuota=2 in worker
@@ -48,7 +48,7 @@ async function run() {
       },
       "batch-user"
     );
-    console.log(`Added batch job: ${jobId}`);
+    console.log(`Added batch jobs: ${jobId}`);
   }
 }
 

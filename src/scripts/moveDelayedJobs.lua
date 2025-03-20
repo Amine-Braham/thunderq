@@ -29,7 +29,7 @@ for _, jobId in ipairs(jobIds) do
     redis.call("ZREM", KEYS[1], jobId) -- Remove from delayed set
 
     -- Update status back to waiting
-    local jobKey = "job:" .. jobId
+    local jobKey = "jobs:" .. jobId
     if redis.call("HEXISTS", jobKey, "status") == 1 then
         redis.call("HSET", jobKey, "status", "waiting")
     end

@@ -1,4 +1,4 @@
--- KEYS[1]: job key (job:jobId)
+-- KEYS[1]: job key (jobs:jobId)
 -- KEYS[2]: processing key (processing:queueName)
 -- ARGV[1]: jobId
 -- ARGV[2]: error name/message
